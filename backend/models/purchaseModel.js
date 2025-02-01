@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 
-const bookSchema = mongoose.Schema(
+const purchaseSchema = mongoose.Schema(
   {
     title: {
       type: String,
       required: true,
     },
-    author: {
-      type: String,
+    price: {
+      type: Number,
       required: true,
     },
-    publishYear: {
+    purchaseDate: {
       type: Number,
       required: true,
     },
@@ -20,4 +20,4 @@ const bookSchema = mongoose.Schema(
   }
 );
 
-export const Book = mongoose.model('Book', bookSchema);
+export const Purchase = mongoose.model('Purcahse', purchaseSchema);

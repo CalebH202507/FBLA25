@@ -1,29 +1,29 @@
 import express from 'express';
-import { Book } from '../models/bookModel.js';
+import { Purchase } from '../models/purchaseModel.js';
 
 const router = express.Router();
 
-// Route for Save a new Book
+// Route for Save a new purchase
 router.post('/', async (request, response) => {
   try {
     if (
       !request.body.title ||
-      !request.body.author ||
-      !request.body.publishYear
+      !request.body.price ||
+      !request.body.purchaseDate
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: title, author, publishYear',
+        message: 'Send all required fields: purchase, price, date',
       });
     }
-    const newBook = {
+    const newPurchase = {
       title: request.body.title,
-      author: request.body.author,
-      publishYear: request.body.publishYear,
+      author: request.body.price,
+      publishYear: request.body.purchaseDate,
     };
 
-    const book = await Book.create(newBook);
+    const purchase = await Purchase.create(newPurchase);
 
-    return response.status(201).send(book);
+    return response.status(201).send(purchase);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -33,11 +33,11 @@ router.post('/', async (request, response) => {
 // Route for Get All Books from database
 router.get('/', async (request, response) => {
   try {
-    const books = await Book.find({});
+    const purchases = await Purchase.find({});
 
     return response.status(200).json({
-      count: books.length,
-      data: books,
+      count: purchases.length,
+      data: purchases,
     });
   } catch (error) {
     console.log(error.message);
@@ -45,12 +45,12 @@ router.get('/', async (request, response) => {
   }
 });
 
-// Route for Get One Book from database by id
+// Route for Get One purchase from database by id
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const book = await Book.findById(id);
+    const purchase = await Purchase.findById(id);
 
     return response.status(200).json(book);
   } catch (error) {
@@ -59,35 +59,35 @@ router.get('/:id', async (request, response) => {
   }
 });
 
-// Route for Update a Book
+// Route for Update a purchase
 router.put('/:id', async (request, response) => {
   try {
     if (
       !request.body.title ||
-      !request.body.author ||
-      !request.body.publishYear
+      !request.body.price ||
+      !request.body.purchaseDate
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: title, author, publishYear',
+        message: 'Send all required fields: title, price, purchaseDate',
       });
     }
 
     const { id } = request.params;
 
-    const result = await Book.findByIdAndUpdate(id, request.body);
+    const result = await Purchase.findByIdAndUpdate(id, request.body);
 
     if (!result) {
-      return response.status(404).json({ message: 'Book not found' });
+      return response.status(404).json({ message: 'Purchase not found' });
     }
 
-    return response.status(200).send({ message: 'Book updated successfully' });
+    return response.status(200).send({ message: 'Purchase log updated successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
 
-// Route for Delete a book
+// Route for Delete a purchase
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;

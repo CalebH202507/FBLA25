@@ -1,7 +1,5 @@
-export const PORT = 5555;
+export const PORT = 1234;
 
 export const mongoDBURL =
-  'mongodb+srv://root:root@books-store-mern.c7ba8z1.mongodb.net/books-collection?retryWrites=true&w=majority';
+  'mongodb://shroomcoder:HiThere@root/?ssl=true&replicaSet=atlas-92nkoc-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0';
 
-// Please create a free database for yourself.
-// This database will be deleted after tutorial
