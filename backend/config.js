@@ -1,5 +1,5 @@
-export const PORT = 1234;
+export const PORT = 5555;
 
 export const mongoDBURL =
-  'mongodb://shroomcoder:HiThere@root/?ssl=true&replicaSet=atlas-92nkoc-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0';
+  'mongodb+srv://shroomcoder:HiThere@cluster0.op1wp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 

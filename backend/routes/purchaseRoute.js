@@ -30,7 +30,7 @@ router.post('/', async (request, response) => {
   }
 });
 
-// Route for Get All Books from database
+// Route for Get All purchases from database
 router.get('/', async (request, response) => {
   try {
     const purchases = await Purchase.find({});
@@ -52,7 +52,7 @@ router.get('/:id', async (request, response) => {
 
     const purchase = await Purchase.findById(id);
 
-    return response.status(200).json(book);
+    return response.status(200).json(purchase);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -92,13 +92,13 @@ router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Book.findByIdAndDelete(id);
+    const result = await Purchase.findByIdAndDelete(id);
 
     if (!result) {
-      return response.status(404).json({ message: 'Book not found' });
+      return response.status(404).json({ message: 'Purchase not found' });
     }
 
-    return response.status(200).send({ message: 'Book deleted successfully' });
+    return response.status(200).send({ message: 'Purchase deleted successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
